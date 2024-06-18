@@ -26,20 +26,20 @@ public class InputSystem : MonoBehaviour
         {
             exp += 1;
             CheckLevelUp();
-            GameManager.Instance.gold += jellySO.gold[level];
-            GameManager.Instance.jelly += jellySO.jelly[level];
+            GameManager.Instance.gold += jellySO.gold[level] + GameManager.Instance.goldOffset;
+            GameManager.Instance.jelly += jellySO.jelly[level] + GameManager.Instance.jellyOffset;
             GameManager.Instance.CallUIEvent();
             yield return new WaitForSeconds(1f);
         }
     }
-    
+
     private void OnMouseDown()
     {
         StopAllCoroutines();
         exp += 1;
         CheckLevelUp();
-        GameManager.Instance.gold += jellySO.gold[level];
-        GameManager.Instance.jelly += jellySO.jelly[level];
+        GameManager.Instance.gold += jellySO.gold[level] + GameManager.Instance.goldOffset;
+        GameManager.Instance.jelly += jellySO.jelly[level] + +GameManager.Instance.jellyOffset;
         StartCoroutine(AutoGoldJelly());
         jellyController.CallTouchEvent();
         GameManager.Instance.CallUIEvent();
@@ -57,6 +57,6 @@ public class InputSystem : MonoBehaviour
                 level++;
                 GetComponent<AnimationSystem>().SetAnimationController(level);
             }
-        }  
+        }
     }
 }
